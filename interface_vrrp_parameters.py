@@ -91,6 +91,10 @@ class VRRPParametersProvides(Object):
 
         self.framework.observe(charm.on[relation_name].relation_joined, self.on_relation_joined)
 
+    @property
+    def is_joined(self):
+        return self._relation is not None
+
     def configure_vrrp_instances(self, vrrp_instances):
         unit_data = self._relation.data[self.model.unit]
         unit_data['vrrp_instances'] = json.dumps(vrrp_instances, default=lambda obj: obj.__dict__)
