@@ -52,16 +52,17 @@ class VRRPParametersRequires(Object):
 
     @property
     def vrrp_instances(self):
-        if self._relation.units:
-            primary_unit = self._relation.units[0]
-            vrrp_instances_serialized = self._relation.data[primary_unit].get('vrrp_instances')
-            vrrp_instances = []
-            if vrrp_instances_serialized is not None:
-                vrrp_instances = json.loads(vrrp_instances)
-            return vrrp_instances
+        primary_unit = next(iter(self._relation.units))
+        vrrp_instances_serialized = self._relation.data[primary_unit].get('vrrp_instances')
+        vrrp_instances = []
+        if vrrp_instances_serialized is not None:
+            vrrp_instances = json.loads(vrrp_instances)
+        return vrrp_instances
 
     def on_relation_changed(self, event):
-        primary_unit = event.relation.units[0]
+        if not event.unit:
+            return
+        primary_unit = event.unit
         if event.relation.data[primary_unit].get('vrrp_instances'):
             self.on.primary_changed.emit()
 
