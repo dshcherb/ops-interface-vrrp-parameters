@@ -48,7 +48,7 @@ class VRRPParametersRequires(Object):
         self._relation_name = relation_name
         # TODO: should it support handling multiple primaries?
         self._relation = self.model.get_relation(relation_name)
-        self.framework.observe(self.on[relation_name].relation_changed, self.on_relation_changed)
+        self.framework.observe(charm.on[relation_name].relation_changed, self.on_relation_changed)
 
     @property
     def vrrp_instances(self):
@@ -84,7 +84,7 @@ class VRRPParametersProvides(Object):
         self._relation_name = relation_name
         self._relation = self.model.get_relation(relation_name)
 
-        self.framework.observe(self.on[relation_name].relation_joined, self.on_relation_joined)
+        self.framework.observe(charm.on[relation_name].relation_joined, self.on_relation_joined)
 
     def configure_vrrp_instances(self, vrrp_instances):
         unit_data = self._relation.data[self.model.unit]
