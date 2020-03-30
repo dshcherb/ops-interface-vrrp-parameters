@@ -59,6 +59,10 @@ class VRRPParametersRequires(Object):
             vrrp_instances = json.loads(vrrp_instances_serialized)
         return vrrp_instances
 
+    @property
+    def is_joined(self):
+        return self._relation is not None
+
     def on_relation_changed(self, event):
         if not event.unit:
             return
