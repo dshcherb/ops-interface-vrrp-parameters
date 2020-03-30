@@ -44,6 +44,7 @@ class VRRPParametersRequires(Object):
     state = StoredState()
 
     def __init__(self, charm, relation_name):
+        super().__init__(charm, relation_name)
         self._relation_name = relation_name
         # TODO: should it support handling multiple primaries?
         self._relation = self.model.get_relation(relation_name)
@@ -79,6 +80,7 @@ class VRRPParametersProvides(Object):
     state = StoredState()
 
     def __init__(self, charm, relation_name):
+        super().__init__(charm, relation_name)
         self._relation_name = relation_name
         self._relation = self.model.get_relation(relation_name)
 
