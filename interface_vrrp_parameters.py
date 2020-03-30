@@ -90,5 +90,5 @@ class VRRPParametersProvides(Object):
         unit_data = self._relation.data[self.model.unit]
         unit_data['vrrp_instances'] = json.dumps(vrrp_instances, default=lambda obj: obj.__dict__)
 
-    def on_relation_joined(self):
+    def on_relation_joined(self, event):
         self.on.keepalived_available.emit()
