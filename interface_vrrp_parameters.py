@@ -1,13 +1,13 @@
 import json
 
-from ops.framework import Object, StoredState, EventsBase, EventBase, EventSource
+from ops.framework import Object, StoredState, EventSetBase, EventBase, EventSource
 
 
 class PrimaryChanged(EventBase):
     pass
 
 
-class VRRPParametersRequiresEvents(EventsBase):
+class VRRPParametersRequiresEvents(EventSetBase):
     primary_changed = EventSource(PrimaryChanged)
 
 
@@ -75,7 +75,7 @@ class KeepalivedAvailable(EventBase):
     pass
 
 
-class VRRPParametersProvidesEvents(EventsBase):
+class VRRPParametersProvidesEvents(EventSetBase):
     keepalived_available = EventSource(KeepalivedAvailable)
 
 
